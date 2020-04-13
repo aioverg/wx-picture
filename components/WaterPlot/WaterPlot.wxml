@@ -1,0 +1,10 @@
+<!--components/WaterPlot/WaterPlot.wxml-->
+<view class="content">
+  <view class="item">
+    <view style="width:80px; height:90px;">one</view>
+  </view>
+  <view class="item">
+    <view style="width:90px; height:100px;">two</view>
+  </view>
+  <text>{{imgList}}</text>
+</view>

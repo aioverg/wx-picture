@@ -1,0 +1,17 @@
+/* components/WaterPlot/WaterPlot.wxss */
+.content { 
+  column-count:3;
+  column-gap: 20px;
+  width: 80%;
+  margin:10px auto;
+}
+.item { 
+  margin-bottom: 15px;
+  break-inside: avoid;
+  background: green;
+}
+@media screen and (max-width: 800px) { 
+  .content { 
+    column-count: 2;
+  } 
+}

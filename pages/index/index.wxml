@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view>
+  <input class="select" />
+  <button>点击</button>
+</view>
+<water-plot />

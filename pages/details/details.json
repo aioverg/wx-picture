@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "water-plot": "../../components/WaterPlot/WaterPlot"
+  }
+}

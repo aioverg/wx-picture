@@ -1,0 +1,10 @@
+<!--pages/details/details.wxml-->
+<text>pages/details/details.wxml</text>
+<view>
+  <image></image>
+  <text>浏览量</text><text>分享到微信</text><text>分享到朋友圈</text>
+  <water-plot />
+  <view>
+    相关图片
+  </view>
+</view>
