@@ -14,10 +14,8 @@ Page({
   onLoad: function (options) {
     const _this = this
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('acceptDataFromOpenerPage', function(data) {
-      console.log(data)
+    eventChannel.on('acceptImgData', function(data) {
       _this.setData({imgURL: data.data})
-      console.log(_this.data)
     })
   },
 

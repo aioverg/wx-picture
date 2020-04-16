@@ -1,7 +1,6 @@
 /* components/searchInput/searchInput.wxss */
 .search_input {
   width: 100%;
-  padding: 0 0 20px;
   position: fixed;
   z-index: 10;
   top: 0;

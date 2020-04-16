@@ -4,14 +4,27 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    toUrl: "../../pages/details/details",
+    imgList: [],
+    oldImgList: []
   },
+    queryImgData: function(){
+      let _this = this
+      getApp().request({ url: "/api/public/v1/categories"}).then(res => {
+        res.data.message[17].children[1].children.forEach(value => _this.data.oldImgList.push(value))
+        _this.setData({
+          imgList: _this.data.oldImgList
+        })
+        return Promise.resolve()
+      }).then(()=>this.selectComponent("#water-fall").getBothList())
+    }
+  ,
   //页面滚动获取数据
   scrollToLower: function(){
-    this.selectComponent("#water-fall").queryImgData()
+    this.queryImgData()
   },
   //事件处理函数
   bindViewTap: function() {
@@ -20,6 +33,7 @@ Page({
     })
   },
   onLoad: function () {
+    this.queryImgData()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
