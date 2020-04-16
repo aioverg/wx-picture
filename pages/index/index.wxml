@@ -1,6 +1,10 @@
 <!--index.wxml-->
 <view>
-  <input class="select" />
-  <button>点击</button>
+  <search-input />
+  <view style="height: 50px"></view>
+  <scroll-view scroll-y lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 100vh;">
+    <!--<water-plot id="water-plot" imgURL="/api/public/v1/categories" />-->
+    <water-fall id="water-fall" />
+  </scroll-view>
 </view>
-<water-plot />
+

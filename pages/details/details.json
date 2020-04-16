@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "water-plot": "../../components/WaterPlot/WaterPlot"
+    "share-info": "../../components/shareInfo/shareInfo",
+    "like-info": "../../components/likeInfo/likeInfo"
   }
 }

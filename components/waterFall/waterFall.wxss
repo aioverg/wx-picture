@@ -1,0 +1,21 @@
+/* components/waterFall/waterFall.wxss */
+.water-fall image{
+  width: 100%;
+  border: 1px solid rgb(253, 239, 252);
+  border-radius: 5px;
+  margin: 0 0 10px;
+}
+.water-fall {
+  width: 95%;
+  position: relative;
+  margin: 0 auto;
+}
+.water-fall .left {
+  width: 48%;
+  position: absolute;
+}
+.water-fall .right {
+  width: 48%;
+  position: absolute;
+  right: 0;
+}

@@ -9,6 +9,10 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+  //页面滚动获取数据
+  scrollToLower: function(){
+    this.selectComponent("#water-fall").queryImgData()
+  },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({

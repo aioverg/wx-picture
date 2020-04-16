@@ -1,24 +1,18 @@
-// pages/details/details.js
+// pages/search/search.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgURL: "null"
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const _this = this
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('acceptDataFromOpenerPage', function(data) {
-      console.log(data)
-      _this.setData({imgURL: data.data})
-      console.log(_this.data)
-    })
+
   },
 
   /**

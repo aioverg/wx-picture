@@ -1,0 +1,7 @@
+<!--components/shareInfo/shareInfo.wxml-->
+<!--转发组件-->
+<view class="share-info">
+  <button class="share" open-type="share">
+    <image mode="widthFix" src="../../icons/share.png">
+  </image></button>
+</view>

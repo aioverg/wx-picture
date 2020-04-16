@@ -1,1 +1,8 @@
 /* pages/details/details.wxss */
+.details { 
+  width: 95%;
+  margin: 0 auto;
+}
+.details .img {
+  width: 100%;
+}

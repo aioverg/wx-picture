@@ -1,5 +1,20 @@
 //app.js
 App({
+  request: (params) => {
+    const baseUrl = "https://api-hmugo-web.itheima.net"
+    return new Promise((resolve, reject) => {
+      wx.request({
+        ...params,
+        url: baseUrl + params.url,
+        success: (result) => {
+          resolve(result)
+        },
+        fail: (error) => {
+          reject(error)
+        }
+      })
+    })
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []

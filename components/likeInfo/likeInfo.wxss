@@ -1,0 +1,14 @@
+/* components/likeInfo/likeInfo.wxss */
+.share-info {
+  display: inline-block;
+}
+.share-info .share {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+.share-info .share image{
+  width: 20px;
+}
