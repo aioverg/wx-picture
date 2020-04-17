@@ -1,1 +1,18 @@
 /**index.wxss**/
+.search_input {
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+}
+.search_input .search {
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid rgb(253, 239, 252);
+  border-radius: 6px;
+  background-color: #fff;
+}
+.search_input .search input {
+  margin: 5px 0;
+}

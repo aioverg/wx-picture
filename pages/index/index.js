@@ -7,24 +7,66 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    scrollTop: 0,
     toUrl: "../../pages/details/details",
-    imgList: [],
-    oldImgList: []
+    queryValue: "",
+    imgList: [],//传递给瀑布图组件的数据
+    allImgList: [],
+    queryImgList: []
   },
-    queryImgData: function(){
-      let _this = this
-      getApp().request({ url: "/api/public/v1/categories"}).then(res => {
-        res.data.message[17].children[1].children.forEach(value => _this.data.oldImgList.push(value))
-        _this.setData({
-          imgList: _this.data.oldImgList
-        })
-        return Promise.resolve()
-      }).then(()=>this.selectComponent("#water-fall").getBothList())
+  //不进行搜索时发送的请求
+  queryAllData: function(){
+    let _this = this
+    getApp().request({ url: "/api/public/v1/categories"}).then(res => {
+      res.data.message[17].children[1].children.forEach(value => _this.data.allImgList.push(value))
+      _this.setData({
+        imgList: _this.data.allImgList
+      })
+      return Promise.resolve()
+    }).then(()=>this.selectComponent("#water-fall").getBothList())
+  },
+  //搜索时获取发送的请求
+  querySearch: function(){
+    let _this = this
+    getApp().request({ url: "/api/public/v1/categories"}).then(res => {
+      res.data.message[16].children[1].children.forEach(value => _this.data.queryImgList.push(value))
+      _this.setData({
+        imgList: _this.data.queryImgList
+      })
+      return Promise.resolve()
+    }).then(()=>this.selectComponent("#water-fall").getBothList())
+  },
+  //判断是否进行搜索
+  setQueryValue: function(e){
+    if(e.detail.value.length !== 0){
+      this.setData({
+        queryValue: e.detail.value,
+        scrollTop: 0,
+        imgList: [],
+        allImgList: [],
+        queryImgList: []
+      })
+      this.selectComponent("#water-fall").clearBothList()
+      this.querySearch()
+    }else{
+      this.setData({
+        queryValue: "",
+        scrollTop: 0,
+        imgList: [],
+        allImgList: [],
+        queryImgList: []
+      })
+      this.selectComponent("#water-fall").clearBothList()
+      this.queryAllData()
     }
-  ,
+  },
   //页面滚动获取数据
   scrollToLower: function(){
-    this.queryImgData()
+    if(this.data.queryValue == ""){
+      this.queryAllData()
+    }else{
+      this.querySearch()
+    }
   },
   //事件处理函数
   bindViewTap: function() {
@@ -33,7 +75,7 @@ Page({
     })
   },
   onLoad: function () {
-    this.queryImgData()
+    this.queryAllData()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -62,7 +104,6 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

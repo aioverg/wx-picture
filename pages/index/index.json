@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "water-fall": "../../components/waterFall/waterFall",
-    "search-input": "../../components/searchInput/searchInput"
+    "water-fall": "../../components/waterFall/waterFall"
   }
 }

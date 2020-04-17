@@ -17,9 +17,9 @@ Component({
 
   //组件的初始数据
   data: {
-    leftList: [], //跳转页面
-    rightList: [], //左列数据
-    dataList: [] //右列数据
+    leftList: [], //左列数据
+    rightList: [], //右列数据
+    dataList: [] //全部数据
   },
 
   //组件的方法列表
@@ -59,6 +59,14 @@ Component({
         leftHeight <= rightHeight ? leftList.push(img) : rightList.push(img)
         await this.getBothHeight(leftList, rightList);
       }
+      
+    },
+    //清空数据
+    clearBothList: function(){
+      this.setData({
+        leftList: [],
+        rightList: []
+      })
     }
   }
 })
