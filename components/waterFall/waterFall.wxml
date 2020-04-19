@@ -1,13 +1,13 @@
 <!--components/waterFall/waterFall.wxml-->
 <view class="water-fall">
  <view id="left" class="left">
-  <view wx:for="{{leftList}}" bindtap="toDetails" wx:key="index" data-id="{{item.cat_icon}}">
-    <image src="{{item.cat_icon}}" mode='widthFix'></image>
+  <view wx:for="{{leftList}}" bindtap="toDetails" wx:key="index" data-id="{{item.id}}" data-url="{{item.cover}}">
+    <image src="{{item.cover}}" mode='widthFix'></image>
   </view>
  </view>
  <view id="right" class="right">
-  <view wx:for="{{rightList}}" wx:key="index">
-    <image src="{{item.cat_icon}}" mode='widthFix'></image>
+  <view wx:for="{{rightList}}" bindtap="toDetails" wx:key="index" data-id="{{item.id}}" data-url="{{item.cover}}">
+    <image src="{{item.cover}}" mode='widthFix'></image>
   </view>
  </view>
 </view>

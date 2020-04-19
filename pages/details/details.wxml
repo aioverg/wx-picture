@@ -1,13 +1,13 @@
 <!--pages/details/details.wxml-->
 <view class="details">
   <view>
-    <image mode="widthFix" class="img" src="{{imgURL}}"></image>
+    <image mode="widthFix" class="img" src="{{imgUrl}}"></image>
     <view>
       <like-info />
       <share-info />
     </view>
   </view>
   <view>
-    相关图片
+    <water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}" />
   </view>
 </view>

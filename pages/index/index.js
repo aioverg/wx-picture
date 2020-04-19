@@ -12,15 +12,24 @@ Page({
     queryValue: "",
     imgList: [],//传递给瀑布图组件的数据
     allImgList: [],
-    queryImgList: []
+    queryImgList: [],
+    lastId: null
   },
   //不进行搜索时发送的请求
   queryAllData: function(){
     let _this = this
-    getApp().request({ url: "/api/public/v1/categories"}).then(res => {
-      res.data.message[17].children[1].children.forEach(value => _this.data.allImgList.push(value))
+    getApp().request({ 
+      url: "/api/applets/content/travelQuery",
+      method: "POST",
+      data: {
+        limit: 10,
+        lastId: this.data.lastId
+      }
+    }).then(res => {
+      res.data.data.contents.forEach(value => _this.data.allImgList.push(value))
       _this.setData({
-        imgList: _this.data.allImgList
+        imgList: _this.data.allImgList,
+        lastId: res.data.data.lastId
       })
       return Promise.resolve()
     }).then(()=>this.selectComponent("#water-fall").getBothList())
@@ -28,10 +37,18 @@ Page({
   //搜索时获取发送的请求
   querySearch: function(){
     let _this = this
-    getApp().request({ url: "/api/public/v1/categories"}).then(res => {
-      res.data.message[16].children[1].children.forEach(value => _this.data.queryImgList.push(value))
+    getApp().request({ 
+      url: "/api/applets/content/travelQuery",
+      data: {
+        keywords: this.data.queryValue,
+        limit: 10,
+        lastId: this.data.lastId
+      }
+    }).then(res => {
+      res.data.data.contents.forEach(value => _this.data.allImgList.push(value))
       _this.setData({
-        imgList: _this.data.queryImgList
+        imgList: _this.data.queryImgList,
+        lastId: res.data.data.lastId
       })
       return Promise.resolve()
     }).then(()=>this.selectComponent("#water-fall").getBothList())
@@ -42,6 +59,7 @@ Page({
       this.setData({
         queryValue: e.detail.value,
         scrollTop: 0,
+        lastId: null,
         imgList: [],
         allImgList: [],
         queryImgList: []
@@ -52,6 +70,7 @@ Page({
       this.setData({
         queryValue: "",
         scrollTop: 0,
+        lastId: null,
         imgList: [],
         allImgList: [],
         queryImgList: []

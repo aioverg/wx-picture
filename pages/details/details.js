@@ -5,7 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgURL: "null"
+    imgId: null,
+    imgUrl: null,
+    imgList: [],
+    allImgList: []
   },
 
   /**
@@ -14,9 +17,27 @@ Page({
   onLoad: function (options) {
     const _this = this
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('acceptImgData', function(data) {
-      _this.setData({imgURL: data.data})
+    eventChannel.on('acceptImgId', function(res) {
+      console.log(res)
+      _this.setData({
+        imgId: res.id,
+        imgUrl: res.url,
+      })
     })
+    getApp().request({
+      url: "/api/applets/content/relatedResourceQuery",
+      method: "POST",
+      data: {
+        contentId: this.data.imgId,
+        limit: 8
+      }
+    }).then(res => {
+      res.data.data.contents.forEach(value => this.data.allImgList.push(value))
+      this.setData({
+        imgList: this.data.allImgList
+      })
+      return Promise.resolve()
+    }).then(()=>this.selectComponent("#water-fall").getBothList())
   },
 
   /**

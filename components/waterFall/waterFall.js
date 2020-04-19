@@ -27,10 +27,14 @@ Component({
     //跳转到详情页面，并将图片ID传送给详情页
     toDetails: function(e){
       let imgId = e.currentTarget.dataset.id
+      let imgUrl = e.currentTarget.dataset.url
       wx.navigateTo({
         url: this.properties.toUrl,
         success: function(res){
-          res.eventChannel.emit('acceptImgData', { data: imgId })
+          res.eventChannel.emit('acceptImgId', { 
+            id: imgId,
+            url: imgUrl
+          })
         }
       })
     },
@@ -59,7 +63,6 @@ Component({
         leftHeight <= rightHeight ? leftList.push(img) : rightList.push(img)
         await this.getBothHeight(leftList, rightList);
       }
-      
     },
     //清空数据
     clearBothList: function(){

@@ -5,7 +5,7 @@
       <input placeholder="搜索" type="text" bindblur="setQueryValue" />
     </view>
   </view>
-  <scroll-view scroll-top="{{scrollTop}}" scroll-y lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 100vh;">
+  <scroll-view scroll-top="{{scrollTop}}" scroll-y lower-threshold="30" bindscrolltolower="scrollToLower" style="height: 100vh;">
     <water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}" />
   </scroll-view>
 </view>
