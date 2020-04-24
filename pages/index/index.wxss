@@ -16,3 +16,9 @@
 .search_input .search input {
   margin: 5px 0;
 }
+.search_input .wav {
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+}

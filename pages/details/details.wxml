@@ -1,7 +1,14 @@
 <!--pages/details/details.wxml-->
 <view class="details">
   <view>
-    <image mode="widthFix" class="img" src="{{imgUrl}}"></image>
+    <swiper bindchange="bindchange" style="height:{{imgsHeight[current]}}rpx;">
+      <block wx:for="{{imgCollectionList}}" wx:key="index">
+        <swiper-item>
+          <image mode="widthFix" class="img" src="{{item.cover}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    
     <view>
       <like-info />
       <share-info />

@@ -26,14 +26,12 @@ Component({
   methods: {
     //跳转到详情页面，并将图片ID传送给详情页
     toDetails: function(e){
-      let imgId = e.currentTarget.dataset.id
-      let imgUrl = e.currentTarget.dataset.url
+      //let imgCollectionData = e.currentTarget.dataset.collectiondata
       wx.navigateTo({
         url: this.properties.toUrl,
         success: function(res){
-          res.eventChannel.emit('acceptImgId', { 
-            id: imgId,
-            url: imgUrl
+          res.eventChannel.emit('acceptImgId', {
+            imgCollectionData: e.currentTarget.dataset.imgcollectiondata
           })
         }
       })

@@ -6,6 +6,10 @@
     </view>
   </view>
   <scroll-view scroll-top="{{scrollTop}}" scroll-y lower-threshold="30" bindscrolltolower="scrollToLower" style="height: 100vh;">
-    <water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}" />
+    <view>
+      <water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}" />
+    </view>
+    <view class="wav" wx:if="{{show}}">没有更多数据</view>
   </scroll-view>
+  
 </view>

@@ -7,6 +7,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    show: false,
     scrollTop: 0,
     toUrl: "../../pages/details/details",
     queryValue: "",
@@ -26,15 +27,30 @@ Page({
         lastId: this.data.lastId
       }
     }).then(res => {
+      if(res.data.data.contents.length == 0){
+        _this.setData({
+          show: true
+        })
+        console.log(3333)
+        return "over"
+      }else{
       res.data.data.contents.forEach(value => _this.data.allImgList.push(value))
       _this.setData({
         imgList: _this.data.allImgList,
         lastId: res.data.data.lastId
       })
-      return Promise.resolve()
-    }).then(()=>this.selectComponent("#water-fall").getBothList())
+      console.log(this.data.imgList)
+      return "run"
+    }
+    }).then((res) => {
+      if(res == "run"){
+        this.selectComponent("#water-fall").getBothList();console.log(res)
+      }else{
+        return
+      }
+    })
   },
-  //搜索时获取发送的请求
+  //搜索时发送的请求
   querySearch: function(){
     let _this = this
     getApp().request({ 
