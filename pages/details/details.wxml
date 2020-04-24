@@ -1,10 +1,15 @@
 <!--pages/details/details.wxml-->
 <view class="details">
   <view>
-    <swiper bindchange="bindchange" style="height:{{imgsHeight[current]}}rpx;">
+    <swiper
+      bindchange="bindchange"
+      indicator-dots="true"
+      circular="true"
+      style="height:{{imgsHeight[current]}}rpx;"
+    >
       <block wx:for="{{imgCollectionList}}" wx:key="index">
         <swiper-item>
-          <image mode="widthFix" class="img" src="{{item.cover}}"></image>
+          <image mode="widthFix" class="img" src="{{item.cover}}" bindload="imageLoad"></image>
         </swiper-item>
       </block>
     </swiper>

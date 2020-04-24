@@ -1,4 +1,5 @@
 // pages/details/details.js
+let imgHeightList = []
 Page({
 
   /**
@@ -9,17 +10,18 @@ Page({
     imgCollectionList: null,
     imgList: [],
     allImgList: [],
-    imgsHeight: [],
+    imgsHeight: null,
     current: 0,
   },
   imageLoad: function(e) {
     // 获取图片宽高比
     let ratio = e.detail.width / e.detail.height
     // 按照宽高比计算图片宽度 100% 时的高度
-    console.log(e)
-    let imgHeight = 712.5 / ratio
-    this.imgsHeight.push(imgHeight)
-    console.log(this.data.imgsHeight)
+    //let imgHeightList = 712.5 / ratio
+    imgHeightList.push(712.5 / ratio)
+    this.setData({
+      imgsHeight: imgHeightList
+    })
 
   },
   bindchange: function(e) {
@@ -36,9 +38,11 @@ Page({
     const _this = this
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('acceptImgId', function(res) {
+      _this.setData({
+        imgId: res.imgCollectionData.id
+      })
       if(res.imgCollectionData.collectionId == 0){
         _this.setData({
-          imgId: res.imgCollectionData.id,
           imgCollectionList: [res.imgCollectionData],
         })
       }else{
@@ -46,7 +50,6 @@ Page({
           url: "/api/applets/contentCollection/" + res.imgCollectionData.collectionId
         }).then(res => {
           _this.setData({
-            imgId: res.imgCollectionData.id,
             imgCollectionList: res.data.data.contents
           })
         })

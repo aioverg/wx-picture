@@ -31,7 +31,6 @@ Page({
         _this.setData({
           show: true
         })
-        console.log(3333)
         return "over"
       }else{
       res.data.data.contents.forEach(value => _this.data.allImgList.push(value))
@@ -39,12 +38,11 @@ Page({
         imgList: _this.data.allImgList,
         lastId: res.data.data.lastId
       })
-      console.log(this.data.imgList)
       return "run"
     }
     }).then((res) => {
       if(res == "run"){
-        this.selectComponent("#water-fall").getBothList();console.log(res)
+        this.selectComponent("#water-fall").getBothList()
       }else{
         return
       }
