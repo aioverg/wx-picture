@@ -12,7 +12,6 @@ Page({
     toUrl: "../../pages/details/details",
     queryValue: "",
     imgList: [],//传递给瀑布图组件的数据
-    queryImgList: [],
     pageNo: 1
   },
   //不进行搜索时发送的请求
@@ -52,6 +51,7 @@ Page({
     let _this = this
     getApp().request({ 
       url: "/api/applets/content/pageQueryPopular",
+      method: "POST",
       data: {
         keywords: this.data.queryValue,
         pageSize: 10,
@@ -59,7 +59,7 @@ Page({
       }
     }).then(res => {
       _this.setData({
-        imgList: _this.data.queryImgList,
+        imgList: res.data.data.list,
         pageNo: res.data.data.nextPage
       })
       return Promise.resolve()
@@ -73,7 +73,6 @@ Page({
         scrollTop: 0,
         lastId: null,
         imgList: [],
-        queryImgList: []
       })
       this.selectComponent("#water-fall").clearBothList()
       this.querySearch()
@@ -83,7 +82,6 @@ Page({
         scrollTop: 0,
         lastId: null,
         imgList: [],
-        queryImgList: []
       })
       this.selectComponent("#water-fall").clearBothList()
       this.queryAllData()

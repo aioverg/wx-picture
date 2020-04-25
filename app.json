@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/details/details",
     "pages/search/search",
-    "pages/popular/popular"
+    "pages/popular/popular",
+    "pages/recommend/recommend"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,6 +27,12 @@
         "text": "热门",
         "iconPath": "icons/popular-1.png",
         "selectedIconPath": "icons/popular-2.png"
+      },
+      {
+        "pagePath": "pages/recommend/recommend",
+        "text": "推荐",
+        "iconPath": "icons/recommend-1.png",
+        "selectedIconPath": "icons/recommend-2.png"
       }
   ]
   },
