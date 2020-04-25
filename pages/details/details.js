@@ -10,19 +10,17 @@ Page({
     imgCollectionList: null,
     imgList: [],
     allImgList: [],
-    imgsHeight: null,
+    imgsHeight: [],
     current: 0,
   },
   imageLoad: function(e) {
     // 获取图片宽高比
     let ratio = e.detail.width / e.detail.height
     // 按照宽高比计算图片宽度 100% 时的高度
-    //let imgHeightList = 712.5 / ratio
-    imgHeightList.push(712.5 / ratio)
+    imgHeightList[e.target.dataset.id] = 712.5 / ratio
     this.setData({
       imgsHeight: imgHeightList
     })
-
   },
   bindchange: function(e) {
     this.setData({
@@ -36,6 +34,7 @@ Page({
    */
   onLoad: function (options) {
     const _this = this
+    imgHeightList = []
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('acceptImgId', function(res) {
       _this.setData({

@@ -27,6 +27,7 @@ Component({
           select: 1,
           heart: this.data.heartTwo
         })
+        
       }else{
         this.setData({
           select: 0,

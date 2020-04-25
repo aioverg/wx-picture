@@ -14,30 +14,31 @@ Page({
     imgList: [],//传递给瀑布图组件的数据
     allImgList: [],
     queryImgList: [],
-    lastId: null
+    pageNo: 1
   },
   //不进行搜索时发送的请求
   queryAllData: function(){
     let _this = this
     getApp().request({ 
-      url: "/api/applets/content/travelQuery",
+      url: "/api/applets/content/pageQueryPopular",
       method: "POST",
       data: {
-        limit: 10,
-        lastId: this.data.lastId
+        pageSize: 10,
+        pageNo: this.data.pageNo
       }
     }).then(res => {
-      if(res.data.data.contents.length == 0){
+      if(res.data.data.list.length == 0){
         _this.setData({
           show: true
         })
         return "over"
       }else{
-      res.data.data.contents.forEach(value => _this.data.allImgList.push(value))
+      res.data.data.list.forEach(value => _this.data.allImgList.push(value))
       _this.setData({
         imgList: _this.data.allImgList,
-        lastId: res.data.data.lastId
+        pageNo: res.data.data.nextPage
       })
+      console.log(this.data.pageNo)
       return "run"
     }
     }).then((res) => {
@@ -52,17 +53,17 @@ Page({
   querySearch: function(){
     let _this = this
     getApp().request({ 
-      url: "/api/applets/content/travelQuery",
+      url: "/api/applets/content/pageQueryPopular",
       data: {
         keywords: this.data.queryValue,
-        limit: 10,
-        lastId: this.data.lastId
+        pageSize: 10,
+        pageNo: this.data.lastId
       }
     }).then(res => {
-      res.data.data.contents.forEach(value => _this.data.allImgList.push(value))
+      res.data.data.list.forEach(value => _this.data.allImgList.push(value))
       _this.setData({
         imgList: _this.data.queryImgList,
-        lastId: res.data.data.lastId
+        pageNo: res.data.data.nextPage
       })
       return Promise.resolve()
     }).then(()=>this.selectComponent("#water-fall").getBothList())

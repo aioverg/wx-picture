@@ -3,6 +3,11 @@
   width: 95%;
   margin: 0 auto;
 }
+.details .img-container {
+  display: none;
+  width: 100%;
+}
 .details .img {
   width: 100%;
+  height: auto;
 }
