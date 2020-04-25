@@ -9,23 +9,26 @@
     >
       <block wx:for="{{imgCollectionList}}" wx:key="index">
         <swiper-item>
-          <image mode="widthFix" class="img" data-id="{{index}}" src="{{item.cover}}" bindload="imageLoad"></image>
+          <image
+            mode="widthFix"
+            class="img"
+            data-id="{{index}}"
+            src="{{item.cover}}"
+            bindload="imageLoad"
+          ></image>
         </swiper-item>
       </block>
     </swiper>
-    <!--<view>
-      <view class="img-container" wx:for="{{imgCollectionList}}" wx:key="index">
-        <image mode="widthFix" class="img" src="{{item.cover}}"></image>
-      </view>
-    </view>
-    -->
-    
     <view>
       <like-info />
       <share-info />
     </view>
   </view>
   <view>
-    <water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}" />
+    <water-fall
+      id="water-fall"
+      toUrl="{{toUrl}}"
+      imgList="{{imgList}}"
+    ></water-fall>
   </view>
 </view>

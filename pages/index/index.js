@@ -12,7 +12,6 @@ Page({
     toUrl: "../../pages/details/details",
     queryValue: "",
     imgList: [],//传递给瀑布图组件的数据
-    allImgList: [],
     queryImgList: [],
     pageNo: 1
   },
@@ -33,12 +32,11 @@ Page({
         })
         return "over"
       }else{
-      res.data.data.list.forEach(value => _this.data.allImgList.push(value))
       _this.setData({
-        imgList: _this.data.allImgList,
+        imgList: res.data.data.list,
         pageNo: res.data.data.nextPage
       })
-      console.log(this.data.pageNo)
+      console.log(this.data.imgList)
       return "run"
     }
     }).then((res) => {
@@ -60,7 +58,6 @@ Page({
         pageNo: this.data.lastId
       }
     }).then(res => {
-      res.data.data.list.forEach(value => _this.data.allImgList.push(value))
       _this.setData({
         imgList: _this.data.queryImgList,
         pageNo: res.data.data.nextPage
@@ -76,7 +73,6 @@ Page({
         scrollTop: 0,
         lastId: null,
         imgList: [],
-        allImgList: [],
         queryImgList: []
       })
       this.selectComponent("#water-fall").clearBothList()
@@ -87,7 +83,6 @@ Page({
         scrollTop: 0,
         lastId: null,
         imgList: [],
-        allImgList: [],
         queryImgList: []
       })
       this.selectComponent("#water-fall").clearBothList()

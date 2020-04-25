@@ -7,7 +7,10 @@
     wx:key="index"
     data-imgcollectiondata="{{item}}"
   >
-    <image src="{{item.cover}}" mode='widthFix'></image>
+    <image
+      src="{{item.cover}}"
+      mode='widthFix'
+    ></image>
   </view>
  </view>
  <view id="right" class="right">

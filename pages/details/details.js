@@ -7,9 +7,9 @@ Page({
    */
   data: {
     imgId: null,
+    toUrl: "../../pages/details/details",
     imgCollectionList: null,
     imgList: [],
-    allImgList: [],
     imgsHeight: [],
     current: 0,
   },
@@ -62,9 +62,8 @@ Page({
         limit: 8
       }
     }).then(res => {
-      res.data.data.contents.forEach(value => this.data.allImgList.push(value))
       this.setData({
-        imgList: this.data.allImgList
+        imgList: res.data.data.contents
       })
       return Promise.resolve()
     }).then(()=>this.selectComponent("#water-fall").getBothList())

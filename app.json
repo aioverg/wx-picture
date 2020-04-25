@@ -3,13 +3,31 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/details/details",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/popular/popular"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "蚂蚁看图",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页",
+        "iconPath": "icons/index-1.png",
+        "selectedIconPath": "icons/index-2.png"
+      },
+      {
+        "pagePath": "pages/popular/popular",
+        "text": "热门",
+        "iconPath": "icons/popular-1.png",
+        "selectedIconPath": "icons/popular-2.png"
+      }
+  ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
