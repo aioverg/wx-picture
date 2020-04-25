@@ -7,11 +7,12 @@ Page({
    */
   data: {
     imgId: null,
+    like: false,
     toUrl: "../../pages/details/details",
     imgCollectionList: null,
     imgList: [],
     imgsHeight: [],
-    current: 0,
+    current: 0
   },
   imageLoad: function(e) {
     // 获取图片宽高比
@@ -26,6 +27,7 @@ Page({
     this.setData({
       current: e.detail.current
     })
+    this.selectComponent("#like-info").refresh()
   },
 
 

@@ -12,9 +12,20 @@ Component({
    */
   data: {
     select: 0,
+    imgData: null,
     heart: "../../icons/heart-1.png",
     heartOne: "../../icons/heart-1.png",
     heartTwo: "../../icons/heart-2.png"
+  },
+  properties: {
+    imgData: {
+      type: Array,
+      value: []
+    },
+    imgIndex: {
+      type: Number,
+      value: 0
+    }
   },
 
   /**
@@ -27,13 +38,26 @@ Component({
           select: 1,
           heart: this.data.heartTwo
         })
-        
+        /*getApp().request({ 
+          url: "/api/applets/content/operate/" + this.properties.imgData[this.properties.imgIndex].id,
+          method: "POST",
+          data: {
+            userId: null
+          }
+        })
+        */
       }else{
         this.setData({
           select: 0,
           heart: this.data.heartOne
         })
       }
+    },
+    refresh: function(){
+      this.setData({
+        select: 0,
+        heart: this.data.heartOne
+      })
     }
   }
 })

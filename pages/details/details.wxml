@@ -20,7 +20,7 @@
       </block>
     </swiper>
     <view>
-      <like-info />
+      <like-info id="like-info" imgData="{{imgCollectionList}}" imgIndex="{{current}}" />
       <share-info />
     </view>
   </view>
