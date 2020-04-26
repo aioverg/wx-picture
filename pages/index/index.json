@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "water-fall": "../../components/waterFall/waterFall",
-    "nav-bar": "../../components/navBar/navBar"
+    "water-fall": "../../components/waterFall/waterFall"
   }
 }

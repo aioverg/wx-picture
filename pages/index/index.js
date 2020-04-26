@@ -25,7 +25,7 @@ Page({
         pageNo: this.data.pageNo
       }
     }).then(res => {
-      if(res.data.data.list.length == 0){
+      if(res.data.data.nextPage == 0){
         _this.setData({
           show: true
         })
@@ -54,15 +54,28 @@ Page({
       data: {
         keywords: this.data.queryValue,
         pageSize: 10,
-        pageNo: this.data.lastId
+        pageNo: this.data.pageNo
       }
     }).then(res => {
-      _this.setData({
-        imgList: res.data.data.list,
-        pageNo: res.data.data.nextPage
-      })
-      return Promise.resolve()
-    }).then(()=>this.selectComponent("#water-fall").getBothList())
+      if(res.data.data.nextPage == 0){
+        _this.setData({
+          show: true
+        })
+        return "over"
+      }else{
+        _this.setData({
+          imgList: res.data.data.list,
+          pageNo: res.data.data.nextPage
+        })
+        return "run"
+      }
+    }).then((res) => {
+      if(res == "run"){
+        this.selectComponent("#water-fall").getBothList()
+      }else{
+        return
+      }
+    })
   },
   //判断是否进行搜索
   setQueryValue: function(e){

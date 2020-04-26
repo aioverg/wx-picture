@@ -36,6 +36,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showShareMenu({
+      // 要求小程序返回分享目标信息
+      withShareTicket: true
+    })
     const _this = this
     imgHeightList = []
     const eventChannel = this.getOpenerEventChannel()
@@ -123,7 +127,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function(res){
+    if( res.from == 'button' ){
+      getApp().request({
+        url: "/api/applets/content/operate/" + this.data.imgCollectionList[this.data.current].id,
+        method: "POST"
+      })
+    }
+    return {
+      title: '蚂蚁看图',
+      path: '/pages/details/details',
+    }
   }
 })
