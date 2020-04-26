@@ -36,4 +36,9 @@
       imgList="{{imgList}}"
     ></water-fall>
   </view>
+  <view class="home-tab">
+    <home-tab
+      toUrl="{{toHome}}"
+    ></home-tab>
+  </view>
 </view>

@@ -15,3 +15,8 @@
   float: right;
   margin: 0 10px 0 0;
 }
+.details .home-tab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

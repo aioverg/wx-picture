@@ -1,1 +1,5 @@
 /* components/homeTab/homeTab.wxss */
+.home-img {
+  width: 30px;
+  height: 30px;
+}

@@ -9,6 +9,7 @@ Page({
     imgCover: null,
     like: false,
     toUrl: "../../pages/details/details",
+    toHome: "../../pages/index/index",
     imgCollectionList: null,
     imgList: [],
     imgsHeight: [],
