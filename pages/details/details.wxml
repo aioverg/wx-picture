@@ -19,9 +19,14 @@
         </swiper-item>
       </block>
     </swiper>
-    <view>
-      <like-info id="like-info" imgData="{{imgCollectionList}}" imgIndex="{{current}}" />
-      <share-info />
+    <view style="height:50px">
+      <share-info class="info"></share-info>
+      <like-info
+        class="info"
+        id="like-info"
+        imgData="{{imgCollectionList}}"
+        imgIndex="{{current}}"
+      ></like-info>
     </view>
   </view>
   <view>

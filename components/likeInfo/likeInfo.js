@@ -51,6 +51,14 @@ Component({
           select: 0,
           heart: this.data.heartOne
         })
+        /*getApp().request({ 
+          url: "/api/applets/content/operate/" + this.properties.imgData[this.properties.imgIndex].id,
+          method: "POST",
+          data: {
+            userId: null
+          }
+        })
+        */
       }
     },
     refresh: function(){

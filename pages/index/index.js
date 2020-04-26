@@ -35,7 +35,6 @@ Page({
         imgList: res.data.data.list,
         pageNo: res.data.data.nextPage
       })
-      console.log(this.data.imgList)
       return "run"
     }
     }).then((res) => {

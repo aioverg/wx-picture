@@ -2,7 +2,7 @@
 .water-fall {
   width: 95%;
   position: relative;
-  margin: 100rpx auto;
+  margin: 14rpx auto;
 }
 
 .water-fall image{

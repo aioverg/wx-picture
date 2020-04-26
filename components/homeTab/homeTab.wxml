@@ -1,0 +1,11 @@
+<!--components/homeTab/homeTab.wxml-->
+<view
+  class="home-bar" 
+  bindtap="skip"
+  >
+  <image
+    class="img"
+    src="{{item.iconPath}}"
+  ></image>
+  <text class="text">{{item.title}}</text>
+</view>

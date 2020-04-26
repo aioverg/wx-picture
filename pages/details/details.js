@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgId: null,
+    imgCover: null,
     like: false,
     toUrl: "../../pages/details/details",
     imgCollectionList: null,
@@ -40,7 +40,7 @@ Page({
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('acceptImgId', function(res) {
       _this.setData({
-        imgId: res.imgCollectionData.id
+        imgCover: res.imgCollectionData
       })
       if(res.imgCollectionData.collectionId == 0){
         _this.setData({
@@ -50,6 +50,9 @@ Page({
         getApp().request({
           url: "/api/applets/contentCollection/" + res.imgCollectionData.collectionId
         }).then(res => {
+          let index = res.data.data.contents.findIndex(value => value.id == _this.data.imgCover.id)
+          res.data.data.contents.splice(index, 1)
+          res.data.data.contents.unshift(_this.data.imgCover)
           _this.setData({
             imgCollectionList: res.data.data.contents
           })
@@ -57,10 +60,13 @@ Page({
       }
     })
     getApp().request({
+      url: "/api/applets/content/" + this.data.imgCover.id
+    })
+    getApp().request({
       url: "/api/applets/content/relatedResourceQuery",
       method: "POST",
       data: {
-        contentId: this.data.imgId,
+        contentId: this.data.imgCover.id,
         limit: 8
       }
     }).then(res => {
