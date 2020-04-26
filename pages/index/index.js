@@ -7,27 +7,27 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    show: false,
     scrollTop: 0,
     toUrl: "../../pages/details/details",
     queryValue: "",
     imgList: [],//传递给瀑布图组件的数据
     pageNo: 1
   },
-  //不进行搜索时发送的请求
-  queryAllData: function(){
+  query: function(obj){
     let _this = this
     getApp().request({ 
-      url: "/api/applets/content/pageQueryPopular",
-      method: "POST",
+      url: obj.url,//"/api/applets/content/pageQueryPopular",
+      method: obj.method,//"POST",
       data: {
-        pageSize: 10,
-        pageNo: this.data.pageNo
+        keywords: obj.keywords,//this.data.queryValue
+        pageSize: obj.pageSize,//10,
+        pageNo: obj.pageNo//this.data.pageNo
       }
     }).then(res => {
       if(res.data.data.nextPage == 0){
-        _this.setData({
-          show: true
+        wx.showToast({
+          title: '没有更多数据',
+          duration: 1500
         })
         return "over"
       }else{
@@ -45,36 +45,23 @@ Page({
       }
     })
   },
-  //搜索时发送的请求
-  querySearch: function(){
-    let _this = this
-    getApp().request({ 
+
+  queryAllData: function(){
+    this.query({
       url: "/api/applets/content/pageQueryPopular",
       method: "POST",
-      data: {
-        keywords: this.data.queryValue,
-        pageSize: 10,
-        pageNo: this.data.pageNo
-      }
-    }).then(res => {
-      if(res.data.data.nextPage == 0){
-        _this.setData({
-          show: true
-        })
-        return "over"
-      }else{
-        _this.setData({
-          imgList: res.data.data.list,
-          pageNo: res.data.data.nextPage
-        })
-        return "run"
-      }
-    }).then((res) => {
-      if(res == "run"){
-        this.selectComponent("#water-fall").getBothList()
-      }else{
-        return
-      }
+      pageSize: 10,
+      pageNo: this.data.pageNo
+    })
+  },
+  //搜索时发送的请求
+  querySearch: function(){
+    this.query({
+      url: "/api/applets/content/pageQueryPopular",
+      keywords: this.data.queryValue,
+      method: "POST",
+      pageSize: 10,
+      pageNo: this.data.pageNo
     })
   },
   //判断是否进行搜索
@@ -83,7 +70,6 @@ Page({
       this.setData({
         queryValue: e.detail.value,
         scrollTop: 0,
-        lastId: null,
         imgList: [],
       })
       this.selectComponent("#water-fall").clearBothList()
@@ -92,7 +78,6 @@ Page({
       this.setData({
         queryValue: "",
         scrollTop: 0,
-        lastId: null,
         imgList: [],
       })
       this.selectComponent("#water-fall").clearBothList()

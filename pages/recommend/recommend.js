@@ -1,66 +1,50 @@
-// pages/recommend/recommend.js
+// pages/popular/popular.js
+const app = getApp()
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    scrollTop: 0,
+    toUrl: "../../pages/details/details",
+    imgList: [],//传递给瀑布图组件的数据
+    pageNo: 1
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  //不进行搜索时发送的请求
+  queryAllData: function(){
+    let _this = this
+    getApp().request({ 
+      url: "/api/applets/content/pageQueryAdvice",
+      method: "POST",
+      data: {
+        pageSize: 10,
+        pageNo: this.data.pageNo
+      }
+    }).then(res => {
+      if(res.data.data.nextPage == 0){
+        wx.showToast({
+          title: '没有更多数据',
+          duration: 2000
+        })
+        return "over"
+      }else{
+      _this.setData({
+        imgList: res.data.data.list,
+        pageNo: res.data.data.nextPage
+      })
+      return "run"
+    }
+    }).then((res) => {
+      if(res == "run"){
+        this.selectComponent("#water-fall").getBothList()
+      }else{
+        return
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  //页面滚动获取数据
+  scrollToLower: function(){
+    this.queryAllData()
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onLoad: function () {
+    this.queryAllData()
   }
 })

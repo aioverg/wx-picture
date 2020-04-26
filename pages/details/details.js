@@ -35,11 +35,10 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    wx.showShareMenu({
-      // 要求小程序返回分享目标信息
-      withShareTicket: true
-    })
+  onLoad: function () {
+    this.getImgCollectionData()
+  },
+  getImgCollectionData: function(){//获取轮播图片
     const _this = this
     imgHeightList = []
     const eventChannel = this.getOpenerEventChannel()
@@ -47,6 +46,8 @@ Page({
       _this.setData({
         imgCover: res.imgCollectionData
       })
+      _this.recommend()
+      _this.clickNum()
       if(res.imgCollectionData.collectionId == 0){
         _this.setData({
           imgCollectionList: [res.imgCollectionData],
@@ -64,9 +65,13 @@ Page({
         })
       }
     })
+  },
+  clickNum: function(){//统计图片点击
     getApp().request({
       url: "/api/applets/content/" + this.data.imgCover.id
     })
+  },
+  recommend: function(){//推荐图片
     getApp().request({
       url: "/api/applets/content/relatedResourceQuery",
       method: "POST",
@@ -86,7 +91,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
@@ -121,7 +125,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    wx.showToast({
+      title: '没有更多数据',
+      duration: 2000
+    })
   },
 
   /**

@@ -18,6 +18,6 @@
         imgList="{{imgList}}" 
       ></water-fall>
     </view>
-    <view class="wav" wx:if="{{show}}">没有更多数据</view>
+    <!--<view class="wav" wx:if="{{show}}">没有更多数据</view>-->
   </scroll-view>
 </view>

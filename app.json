@@ -4,7 +4,6 @@
     "pages/logs/logs",
     "pages/details/details",
     "pages/search/search",
-    "pages/popular/popular",
     "pages/recommend/recommend"
   ],
   "window": {
@@ -21,12 +20,6 @@
         "text": "主页",
         "iconPath": "icons/index-1.png",
         "selectedIconPath": "icons/index-2.png"
-      },
-      {
-        "pagePath": "pages/popular/popular",
-        "text": "热门",
-        "iconPath": "icons/popular-1.png",
-        "selectedIconPath": "icons/popular-2.png"
       },
       {
         "pagePath": "pages/recommend/recommend",
