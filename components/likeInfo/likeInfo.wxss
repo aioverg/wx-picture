@@ -10,5 +10,6 @@
   background: #fff;
 }
 .share-info .share image{
-  width: 35px;
+  width: 30px;
+  margin: 8px 0 0;
 }

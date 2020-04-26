@@ -12,10 +12,12 @@ Page({
     toHome: "../../pages/index/index",
     imgCollectionList: null,
     imgList: [],
+    pageNo: 1,
     imgsHeight: [],
-    current: 0
+    current: 0,
+    scrollTop: 0
   },
-  imageLoad: function(e) {
+  imageLoad: function (e) {
     // 获取图片宽高比
     let ratio = e.detail.width / e.detail.height
     // 按照宽高比计算图片宽度 100% 时的高度
@@ -24,7 +26,7 @@ Page({
       imgsHeight: imgHeightList
     })
   },
-  bindchange: function(e) {
+  bindchange: function (e) {
     this.setData({
       current: e.detail.current
     })
@@ -38,21 +40,21 @@ Page({
   onLoad: function () {
     this.getImgCollectionData()
   },
-  getImgCollectionData: function(){//获取轮播图片
+  getImgCollectionData: function () { //获取轮播图片
     const _this = this
     imgHeightList = []
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('acceptImgId', function(res) {
+    eventChannel.on('acceptImgId', function (res) {
       _this.setData({
         imgCover: res.imgCollectionData
       })
       _this.recommend()
       _this.clickNum()
-      if(res.imgCollectionData.collectionId == 0){
+      if (res.imgCollectionData.collectionId == 0) {
         _this.setData({
           imgCollectionList: [res.imgCollectionData],
         })
-      }else{
+      } else {
         getApp().request({
           url: "/api/applets/contentCollection/" + res.imgCollectionData.collectionId
         }).then(res => {
@@ -66,32 +68,57 @@ Page({
       }
     })
   },
-  clickNum: function(){//统计图片点击
+  //页面滚动获取数据
+  scrollToLower: function () {
+    this.recommend()
+  },
+  clickNum: function () { //统计图片点击
     getApp().request({
       url: "/api/applets/content/" + this.data.imgCover.id
     })
   },
-  recommend: function(){//推荐图片
+  recommend: function () { //推荐图片
+    const _this = this
     getApp().request({
-      url: "/api/applets/content/relatedResourceQuery",
+      url: "/api/applets/content/pageQueryRelateContent",
       method: "POST",
       data: {
         contentId: this.data.imgCover.id,
-        limit: 8
+        pageNo: this.data.pageNo,
+        pageSize: 8
       }
     }).then(res => {
-      this.setData({
-        imgList: res.data.data.contents
-      })
-      return Promise.resolve()
-    }).then(()=>this.selectComponent("#water-fall").getBothList())
+      if (res.data.data.nextPage == 0 || !res.data.data.nextPage) {
+        wx.showToast({
+          title: '没有更多数据',
+          duration: 1500
+        })
+        return "over"
+      } else {
+        _this.setData({
+          imgList: res.data.data.list,
+          pageNo: res.data.data.nextPage
+        })
+        return "run"
+      }
+    }).then((res) => {
+      if (res == "run") {
+        this.selectComponent("#water-fall").getBothList()
+      } else {
+        return
+      }
+    })
+  },
+  backTop: function(e){
+    this.setData({
+      scrollTop: 0
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
@@ -125,17 +152,18 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    wx.showToast({
+    /*wx.showToast({
       title: '没有更多数据',
       duration: 2000
     })
+    */
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(res){
-    if( res.from == 'button' ){
+  onShareAppMessage: function (res) {
+    if (res.from == 'button') {
       getApp().request({
         url: "/api/applets/content/operate/" + this.data.imgCollectionList[this.data.current].id,
         method: "POST"

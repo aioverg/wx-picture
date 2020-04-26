@@ -1,17 +1,8 @@
 <!--pages/popular/popular.wxml-->
 <view class="app">
-  <scroll-view
-    scroll-top="{{scrollTop}}"
-    scroll-y lower-threshold="50"
-    bindscrolltolower="scrollToLower"
-    style="height: 100vh;"
-  >
-    <view>
-      <water-fall
-        id="water-fall"
-        toUrl="{{toUrl}}"
-        imgList="{{imgList}}" 
-      ></water-fall>
-    </view>
-  </scroll-view>
+	<scroll-view scroll-top="{{scrollTop}}" scroll-y lower-threshold="50" bindscrolltolower="scrollToLower" style="height: 100vh;">
+		<view>
+			<water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}"></water-fall>
+		</view>
+	</scroll-view>
 </view>

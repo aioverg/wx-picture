@@ -1,5 +1,9 @@
 /* pages/details/details.wxss */
 .details { 
+  width: 100%;
+  margin: 0 auto;
+}
+.details .swiper {
   width: 95%;
   margin: 0 auto;
 }
@@ -15,8 +19,21 @@
   float: right;
   margin: 0 10px 0 0;
 }
-.details .home-tab {
+.details .text {
+  width: 95%;
+  margin: 0 auto;
+}
+.home-tab {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+.back-top {
   position: fixed;
   bottom: 20px;
   right: 20px;
+}
+.back-top .back-img {
+  width: 30px;
+  height: 30px;
 }

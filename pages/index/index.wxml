@@ -1,23 +1,13 @@
 <!--index.wxml-->
 <view class="app">
-  <view class="search_input">
-    <view class="search">
-      <input placeholder="搜索" type="text" bindblur="setQueryValue" />
-    </view>
-  </view>
-  <scroll-view
-    scroll-top="{{scrollTop}}"
-    scroll-y lower-threshold="50"
-    bindscrolltolower="scrollToLower"
-    style="height: 100vh;"
-  >
-    <view>
-      <water-fall
-        id="water-fall"
-        toUrl="{{toUrl}}"
-        imgList="{{imgList}}" 
-      ></water-fall>
-    </view>
-    <!--<view class="wav" wx:if="{{show}}">没有更多数据</view>-->
-  </scroll-view>
+	<view class="search_input">
+		<view class="search">
+			<input placeholder="搜索" type="text" bindblur="setQueryValue" />
+		</view>
+	</view>
+	<scroll-view scroll-top="{{scrollTop}}" scroll-y lower-threshold="50" bindscrolltolower="scrollToLower" style="height: 100vh;">
+		<view>
+			<water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}"></water-fall>
+		</view>
+	</scroll-view>
 </view>

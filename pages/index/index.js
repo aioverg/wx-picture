@@ -10,43 +10,43 @@ Page({
     scrollTop: 0,
     toUrl: "../../pages/details/details",
     queryValue: "",
-    imgList: [],//传递给瀑布图组件的数据
+    imgList: [], //传递给瀑布图组件的数据
     pageNo: 1
   },
-  query: function(obj){
+  query: function (obj) {
     let _this = this
-    getApp().request({ 
-      url: obj.url,//"/api/applets/content/pageQueryPopular",
-      method: obj.method,//"POST",
+    getApp().request({
+      url: obj.url,
+      method: obj.method,
       data: {
-        keywords: obj.keywords,//this.data.queryValue
-        pageSize: obj.pageSize,//10,
-        pageNo: obj.pageNo//this.data.pageNo
+        keywords: obj.keywords,
+        pageSize: obj.pageSize,
+        pageNo: obj.pageNo
       }
     }).then(res => {
-      if(res.data.data.nextPage == 0){
+      if (res.data.data.nextPage == 0) {
         wx.showToast({
           title: '没有更多数据',
           duration: 1500
         })
         return "over"
-      }else{
-      _this.setData({
-        imgList: res.data.data.list,
-        pageNo: res.data.data.nextPage
-      })
-      return "run"
-    }
+      } else {
+        _this.setData({
+          imgList: res.data.data.list,
+          pageNo: res.data.data.nextPage
+        })
+        return "run"
+      }
     }).then((res) => {
-      if(res == "run"){
+      if (res == "run") {
         this.selectComponent("#water-fall").getBothList()
-      }else{
+      } else {
         return
       }
     })
   },
 
-  queryAllData: function(){
+  queryAllData: function () { //全部数据
     this.query({
       url: "/api/applets/content/pageQueryPopular",
       method: "POST",
@@ -54,8 +54,8 @@ Page({
       pageNo: this.data.pageNo
     })
   },
-  //搜索时发送的请求
-  querySearch: function(){
+
+  querySearch: function () { //搜索时发送的请求
     this.query({
       url: "/api/applets/content/pageQueryPopular",
       keywords: this.data.queryValue,
@@ -65,8 +65,8 @@ Page({
     })
   },
   //判断是否进行搜索
-  setQueryValue: function(e){
-    if(e.detail.value.length !== 0){
+  setQueryValue: function (e) {
+    if (e.detail.value.length !== 0) {
       this.setData({
         queryValue: e.detail.value,
         scrollTop: 0,
@@ -74,7 +74,7 @@ Page({
       })
       this.selectComponent("#water-fall").clearBothList()
       this.querySearch()
-    }else{
+    } else {
       this.setData({
         queryValue: "",
         scrollTop: 0,
@@ -85,15 +85,15 @@ Page({
     }
   },
   //页面滚动获取数据
-  scrollToLower: function(){
-    if(this.data.queryValue == ""){
+  scrollToLower: function () {
+    if (this.data.queryValue == "") {
       this.queryAllData()
-    }else{
+    } else {
       this.querySearch()
     }
   },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
@@ -105,7 +105,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -127,7 +127,7 @@ Page({
       })
     }
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

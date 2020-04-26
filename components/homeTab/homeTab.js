@@ -14,7 +14,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    iconPath: "../../icons/index-1.png"
+    iconPath: "../../icons/home.png"
   },
 
   /**
