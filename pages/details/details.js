@@ -7,6 +7,7 @@ Page({
    */
   data: {
     imgCoverData: null,
+    shareImgCovergData: null,
     like: false,
     toUrl: "../../pages/details/details",
     toHome: "../../pages/index/index",
@@ -38,24 +39,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getImgCoverData()
+    getApp().request({
+      url: "/api/applets/content/" + options.id
+    }).then(res => {
+      this.setData({
+        imgCoverId: res.data.data.id
+      })
+      this.getImgCollectionData(res.data.data)
+      this.getRecommendImgData(res.data.data)
+    })
   },
-  scrollToLower: function () {//监听滚动条
+  scrollToLower: function () { //监听滚动条
     this.getRecommendImgData(this.data.imgCoverData)
   },
 
-/*>>>>>>>>>>>>>>>>>>>>>自定义方法--开始<<<<<<<<<<<<<<<<<<<<<<*/
-  getImgCoverData: function () {//接受传过来的图集封面信息
-    const _this = this
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('putImgCoverData', function (res) {
-      _this.setData({
-        imgCoverData: res.imgCoverData
-      })
-      _this.getImgCollectionData(res.imgCoverData)
-      _this.getRecommendImgData(res.imgCoverData)
-    })
-  },
+  /*>>>>>>>>>>>>>>>>>>>>>自定义方法--开始<<<<<<<<<<<<<<<<<<<<<<*/
   getImgCollectionData: function (imgCoverData) { //根据图集封面数据获取整个图集
     imgHeightList = []
     if (imgCoverData.collectionId == 0) {
@@ -67,10 +65,9 @@ Page({
         url: "/api/applets/contentCollection/" + imgCoverData.collectionId
       }).then(res => {
         let index = res.data.data.contents.findIndex(value => value.id == imgCoverData.id)
-        res.data.data.contents.splice(index, 1)
-        res.data.data.contents.unshift(imgCoverData)
         this.setData({
-          imgCollectionList: res.data.data.contents
+          imgCollectionList: res.data.data.contents,
+          current: index
         })
       })
     }
@@ -82,6 +79,13 @@ Page({
     })
   },
   getRecommendImgData: function (imgCoverData) { //根据图集封面数据获取推荐图片
+    if (this.data.pageNo == 0) {
+      wx.showToast({
+        title: '没有更多数据',
+        duration: 1500
+      })
+      return "over"
+    }
     getApp().request({
       url: "/api/applets/content/pageQueryRelateContent",
       method: "POST",
@@ -91,19 +95,12 @@ Page({
         pageSize: 8
       }
     }).then(res => {
-      if (res.data.data.nextPage == 0 || !res.data.data.nextPage) {
-        wx.showToast({
-          title: '没有更多数据',
-          duration: 1500
-        })
-        return "over"
-      } else {
-        this.setData({
-          imgList: res.data.data.list,
-          pageNo: res.data.data.nextPage
-        })
-        return "run"
-      }
+
+      this.setData({
+        imgList: res.data.data.list,
+        pageNo: res.data.data.nextPage
+      })
+      return "run"
     }).then((res) => {
       if (res == "run") {
         this.selectComponent("#water-fall").getBothList()
@@ -117,7 +114,7 @@ Page({
       scrollTop: 0
     })
   },
-/*>>>>>>>>>>>>>>>>>>>>>自定义方法--结束<<<<<<<<<<<<<<<<<<<<<<*/
+  /*>>>>>>>>>>>>>>>>>>>>>自定义方法--结束<<<<<<<<<<<<<<<<<<<<<<*/
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -175,7 +172,7 @@ Page({
     }
     return {
       title: '蚂蚁看图',
-      path: '/pages/details/details?uuuu=' + "aaaaa"
+      path: '/pages/details/details?id=' + this.data.imgCollectionList[this.data.current].id
     }
   }
 })

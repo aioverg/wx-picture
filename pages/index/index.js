@@ -15,6 +15,13 @@ Page({
   },
   query: function (obj) {
     let _this = this
+    if (this.data.pageNo == 0) {
+      wx.showToast({
+        title: '没有更多数据',
+        duration: 1500
+      })
+      return "over"
+    }
     getApp().request({
       url: obj.url,
       method: obj.method,
@@ -24,24 +31,15 @@ Page({
         pageNo: obj.pageNo
       }
     }).then(res => {
-      if (res.data.data.nextPage == 0) {
-        wx.showToast({
-          title: '没有更多数据',
-          duration: 1500
-        })
-        return "over"
-      } else {
-        _this.setData({
-          imgList: res.data.data.list,
-          pageNo: res.data.data.nextPage
-        })
-        return "run"
-      }
+
+      _this.setData({
+        imgList: res.data.data.list,
+        pageNo: res.data.data.nextPage
+      })
+      return "run"
     }).then((res) => {
       if (res == "run") {
         this.selectComponent("#water-fall").getBothList()
-      } else {
-        return
       }
     })
   },

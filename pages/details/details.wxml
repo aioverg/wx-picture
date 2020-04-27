@@ -1,7 +1,7 @@
 <!--pages/details/details.wxml-->
 <scroll-view class="details" scroll-top="{{scrollTop}}" scroll-y lower-threshold="50" bindscrolltolower="scrollToLower" style="height: 100vh;">
 	<view class="swiper">
-		<swiper bindchange="bindchange" indicator-dots="true" circular="true" style="height:{{imgsHeight[current]}}rpx;">
+		<swiper bindchange="bindchange" indicator-dots="true" current="{{current}}" circular="true" style="height:{{imgsHeight[current]}}rpx;">
 			<block wx:for="{{imgCollectionList}}" wx:key="index">
 				<swiper-item>
 					<image mode="widthFix" class="img" data-id="{{index}}" src="{{item.cover}}" bindload="imageLoad"></image>

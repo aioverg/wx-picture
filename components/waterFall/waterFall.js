@@ -28,12 +28,7 @@ Component({
     toDetails: function(e){
       //let imgCollectionData = e.currentTarget.dataset.collectiondata
       wx.navigateTo({
-        url: this.properties.toUrl,
-        success: function(res){
-          res.eventChannel.emit('putImgCoverData', {
-            imgCoverData: e.currentTarget.dataset.imgcollectiondata
-          })
-        }
+        url: this.properties.toUrl + "?id="+ e.currentTarget.dataset.imgcollectiondata.id,
       })
     },
     //获取左右两边的图片列表高度
