@@ -16,7 +16,8 @@ Page({
     pageNo: 1,
     imgsHeight: [],
     current: 0,
-    scrollTop: 0
+    scrollTop: 0,
+    select: true
   },
   imageLoad: function (e) {
     // 获取图片宽高比
@@ -28,10 +29,7 @@ Page({
     })
   },
   bindchange: function (e) {
-    this.setData({
-      current: e.detail.current
-    })
-    this.selectComponent("#like-info").refresh()
+    this.like()
   },
 
 
@@ -69,6 +67,7 @@ Page({
           imgCollectionList: res.data.data.contents,
           current: index
         })
+        this.like()
       })
     }
   },
@@ -108,6 +107,18 @@ Page({
         return
       }
     })
+  },
+  collect: function(){
+    this.data.imgCollectionList[this.data.current].ifFavorite = !this.data.imgCollectionList[this.data.current].ifFavorite
+    this.like()
+    console.log(this.data.imgCollectionList)
+    console.log(this.data.select)
+  },
+  like: function(){
+    this.setData({
+      select: this.data.imgCollectionList[this.data.current].ifFavorite
+    })
+    console.log("like", this.data.select, this.data.current)
   },
   backTop: function (e) { //回到顶部
     this.setData({

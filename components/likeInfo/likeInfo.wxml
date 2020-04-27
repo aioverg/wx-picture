@@ -2,6 +2,6 @@
 <!--点赞组件-->
 <view class="share-info">
   <button class="share">
-    <image mode="widthFix" bindtap="select" src="{{heart}}">
+    <image mode="widthFix" bindtap="collect" src="{{heart}}">
   </image></button>
 </view>

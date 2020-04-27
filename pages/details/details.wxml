@@ -10,7 +10,7 @@
 		</swiper>
 		<view style="height:50px">
 			<share-info class="info" id="share-info" imgData="{{imgCollectionList}}" imgIndex="{{current}}"></share-info>
-			<like-info class="info" id="like-info" imgData="{{imgCollectionList}}" imgIndex="{{current}}"></like-info>
+			<like-info class="info" id="like-info" bind:collect="collect" select="{{select}}"></like-info>
       <home-tab class="info" toUrl="{{toHome}}"></home-tab>
 		</view>
 	</view>
