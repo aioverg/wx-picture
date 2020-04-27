@@ -1,7 +1,7 @@
 //app.js
 App({
   request: (params) => {
-    const baseUrl = "https://affiliater.zone"
+    const baseUrl = "https://affiliater.zone" ////"http://192.168.3.44:8080"
     return new Promise((resolve, reject) => {
       wx.request({
         ...params,
@@ -29,7 +29,7 @@ App({
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'https://affiliater.zone/api/applets/user/login',
+            url: 'https://affiliater.zone/api/applets/user/login',//"http://192.168.3.44:8080/api/applets/user/login",
             method: "POST",
             data: {
               resCode: res.code

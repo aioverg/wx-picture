@@ -34,34 +34,45 @@ Component({
           select: 1,
           heart: this.data.heartTwo
         })
-        /*getApp().request({ 
+        getApp().request({ 
           url: "/api/applets/content/operate/" + this.properties.imgData[this.properties.imgIndex].id,
           method: "POST",
           data: {
-            userId: null
+            type: "collect"
           }
         })
-        */
       }else{
         this.setData({
           select: 0,
           heart: this.data.heartOne
         })
-        /*getApp().request({ 
+        getApp().request({ 
           url: "/api/applets/content/operate/" + this.properties.imgData[this.properties.imgIndex].id,
           method: "POST",
           data: {
-            userId: null
+            type: "cancel_collect"
           }
         })
-        */
       }
     },
+    ready: function(){
+      this.refresh()
+    },
     refresh: function(){
-      this.setData({
-        select: 0,
-        heart: this.data.heartOne
-      })
+      //console.log(000,this.properties.imgData[this.properties.imgIndex])
+      if(!this.properties.imgData[this.properties.imgIndex].ifFavorite){
+        //console.log(000,this.properties.imgData[this.properties.imgIndex].ifFavorite)
+        this.setData({
+          select: 0,
+          heart: this.data.heartOne
+        })
+      }else{
+        //console.log(111,this.properties.imgData[this.properties.imgIndex].ifFavorite)
+        this.setData({
+          select: 1,
+          heart: this.data.heartTwo
+        })
+      }
     }
   }
 })

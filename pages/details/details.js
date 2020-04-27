@@ -171,7 +171,7 @@ Page({
     }
     return {
       title: '蚂蚁看图',
-      path: '/pages/details/details',
+      path: '/pages/details/details'
     }
   }
 })
