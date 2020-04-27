@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgCover: null,
+    imgCoverData: null,
+    imgCoverId: null,
     like: false,
     toUrl: "../../pages/details/details",
     toHome: "../../pages/index/index",
@@ -38,52 +39,55 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    this.getImgCollectionData()
+    this.getImgCoverData()
+    this.getImgCollectionData(this.data.imgCoverData)
+    this.getRecommendImgData(this.data.imgCoverData)
   },
-  getImgCollectionData: function () { //获取轮播图片
+  scrollToLower: function () {//监听滚动条
+    this.getRecommendImgData(this.data.imgCoverData)
+  },
+
+/*>>>>>>>>>>>>>>>>>>>>>自定义方法<<<<<<<<<<<<<<<<<<<<<<*/
+  getImgCoverData: function () {//接受传过来的图集封面信息
     const _this = this
-    imgHeightList = []
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('acceptImgId', function (res) {
       _this.setData({
-        imgCover: res.imgCollectionData
+        imgCoverData: res.imgCollectionData
       })
-      _this.recommend()
-      _this.clickNum()
-      if (res.imgCollectionData.collectionId == 0) {
-        _this.setData({
-          imgCollectionList: [res.imgCollectionData],
-        })
-      } else {
-        getApp().request({
-          url: "/api/applets/contentCollection/" + res.imgCollectionData.collectionId
-        }).then(res => {
-          let index = res.data.data.contents.findIndex(value => value.id == _this.data.imgCover.id)
-          res.data.data.contents.splice(index, 1)
-          res.data.data.contents.unshift(_this.data.imgCover)
-          _this.setData({
-            imgCollectionList: res.data.data.contents
-          })
-        })
-      }
     })
   },
-  //页面滚动获取数据
-  scrollToLower: function () {
-    this.recommend()
+  getImgCollectionData: function (imgCoverData) { //根据图集封面数据获取整个图集
+    imgHeightList = []
+    if (imgCoverData.collectionId == 0) {
+      this.setData({
+        imgCollectionList: [imgCoverData],
+      })
+    } else {
+      getApp().request({
+        url: "/api/applets/contentCollection/" + imgCoverData.collectionId
+      }).then(res => {
+        let index = res.data.data.contents.findIndex(value => value.id == imgCoverData.id)
+        res.data.data.contents.splice(index, 1)
+        res.data.data.contents.unshift(imgCoverData)
+        this.setData({
+          imgCollectionList: res.data.data.contents
+        })
+      })
+    }
   },
+
   clickNum: function () { //统计图片点击
     getApp().request({
       url: "/api/applets/content/" + this.data.imgCover.id
     })
   },
-  recommend: function () { //推荐图片
-    const _this = this
+  getRecommendImgData: function (imgCoverData) { //根据图集封面数据获取推荐图片
     getApp().request({
       url: "/api/applets/content/pageQueryRelateContent",
       method: "POST",
       data: {
-        contentId: this.data.imgCover.id,
+        contentId: imgCoverData.id,
         pageNo: this.data.pageNo,
         pageSize: 8
       }
@@ -95,7 +99,7 @@ Page({
         })
         return "over"
       } else {
-        _this.setData({
+        this.setData({
           imgList: res.data.data.list,
           pageNo: res.data.data.nextPage
         })
@@ -109,11 +113,12 @@ Page({
       }
     })
   },
-  backTop: function(e){
+  backTop: function (e) { //回到顶部
     this.setData({
       scrollTop: 0
     })
   },
+/*>>>>>>>>>>>>>>>>>>>>>自定义方法<<<<<<<<<<<<<<<<<<<<<<*/
 
   /**
    * 生命周期函数--监听页面初次渲染完成
