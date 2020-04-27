@@ -30,8 +30,8 @@ Component({
       wx.navigateTo({
         url: this.properties.toUrl,
         success: function(res){
-          res.eventChannel.emit('acceptImgId', {
-            imgCollectionData: e.currentTarget.dataset.imgcollectiondata
+          res.eventChannel.emit('putImgCoverData', {
+            imgCoverData: e.currentTarget.dataset.imgcollectiondata
           })
         }
       })

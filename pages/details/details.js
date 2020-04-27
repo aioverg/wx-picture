@@ -7,7 +7,6 @@ Page({
    */
   data: {
     imgCoverData: null,
-    imgCoverId: null,
     like: false,
     toUrl: "../../pages/details/details",
     toHome: "../../pages/index/index",
@@ -38,23 +37,23 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     this.getImgCoverData()
-    this.getImgCollectionData(this.data.imgCoverData)
-    this.getRecommendImgData(this.data.imgCoverData)
   },
   scrollToLower: function () {//监听滚动条
     this.getRecommendImgData(this.data.imgCoverData)
   },
 
-/*>>>>>>>>>>>>>>>>>>>>>自定义方法<<<<<<<<<<<<<<<<<<<<<<*/
+/*>>>>>>>>>>>>>>>>>>>>>自定义方法--开始<<<<<<<<<<<<<<<<<<<<<<*/
   getImgCoverData: function () {//接受传过来的图集封面信息
     const _this = this
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('acceptImgId', function (res) {
+    eventChannel.on('putImgCoverData', function (res) {
       _this.setData({
-        imgCoverData: res.imgCollectionData
+        imgCoverData: res.imgCoverData
       })
+      _this.getImgCollectionData(res.imgCoverData)
+      _this.getRecommendImgData(res.imgCoverData)
     })
   },
   getImgCollectionData: function (imgCoverData) { //根据图集封面数据获取整个图集
@@ -118,7 +117,7 @@ Page({
       scrollTop: 0
     })
   },
-/*>>>>>>>>>>>>>>>>>>>>>自定义方法<<<<<<<<<<<<<<<<<<<<<<*/
+/*>>>>>>>>>>>>>>>>>>>>>自定义方法--结束<<<<<<<<<<<<<<<<<<<<<<*/
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -176,7 +175,7 @@ Page({
     }
     return {
       title: '蚂蚁看图',
-      path: '/pages/details/details'
+      path: '/pages/details/details?uuuu=' + "aaaaa"
     }
   }
 })
