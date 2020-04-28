@@ -29,7 +29,7 @@ App({
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'https://newidea.zone/api/applets/user/login',
+            url: 'https://newidea.zone/api/applets/user/login',//http://192.168.3.44:8080 //https://newidea.zone
             method: "POST",
             data: {
               resCode: res.code

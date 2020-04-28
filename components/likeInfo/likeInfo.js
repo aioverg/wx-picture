@@ -34,7 +34,6 @@ Component({
   },
   observers: {
     "select": function () {
-      console.log(9999999999)
       if (!this.properties.select) {
         this.setData({
           heart: this.data.heartOne

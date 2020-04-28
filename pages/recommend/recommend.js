@@ -11,6 +11,13 @@ Page({
   //不进行搜索时发送的请求
   queryAllData: function(){
     let _this = this
+    if(this.data.pageNo == 0){
+      wx.showToast({
+        title: '没有更多数据',
+        duration: 1500
+      })
+      return "over"
+    }
     getApp().request({ 
       url: "/api/applets/content/pageQueryAdvice",
       method: "POST",
@@ -19,24 +26,14 @@ Page({
         pageNo: this.data.pageNo
       }
     }).then(res => {
-      if(res.data.data.nextPage == 0){
-        wx.showToast({
-          title: '没有更多数据',
-          duration: 2000
-        })
-        return "over"
-      }else{
       _this.setData({
         imgList: res.data.data.list,
         pageNo: res.data.data.nextPage
       })
       return "run"
-    }
-    }).then((res) => {
+    }).then(res => {
       if(res == "run"){
         this.selectComponent("#water-fall").getBothList()
-      }else{
-        return
       }
     })
   },

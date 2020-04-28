@@ -35,7 +35,6 @@ Page({
     this.like()
   },
 
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -77,7 +76,11 @@ Page({
 
   clickNum: function () { //统计图片点击
     getApp().request({
-      url: "/api/applets/content/" + this.data.imgCover.id
+      url: "/api/applets/content/" + this.data.imgCover.id,
+      method: "POST",
+      data: {
+        type: "click"
+      }
     })
   },
   getRecommendImgData: function (imgCoverData) { //根据图集封面数据获取推荐图片
@@ -97,7 +100,6 @@ Page({
         pageSize: 8
       }
     }).then(res => {
-
       this.setData({
         imgList: res.data.data.list,
         pageNo: res.data.data.nextPage
@@ -106,22 +108,34 @@ Page({
     }).then((res) => {
       if (res == "run") {
         this.selectComponent("#water-fall").getBothList()
-      } else {
-        return
       }
     })
   },
   collect: function(){
     this.data.imgCollectionList[this.data.current].ifFavorite = !this.data.imgCollectionList[this.data.current].ifFavorite
     this.like()
-    console.log(this.data.imgCollectionList)
-    console.log(this.data.select)
+    if(this.data.imgCollectionList[this.data.current].ifFavorite){
+      getApp().request({
+        url: "/api/applets/content/operate/" + this.data.imgCollectionList[this.data.current].id,
+        method: "POST",
+        data: {
+          type: "collect"
+        }
+      })
+    }else{
+      getApp().request({
+        url: "/api/applets/content/operate/" + this.data.imgCollectionList[this.data.current].id,
+        method: "POST",
+        data: {
+          type: "cancel_collect"
+        }
+      })
+    }
   },
   like: function(){
     this.setData({
       select: this.data.imgCollectionList[this.data.current].ifFavorite
     })
-    console.log("like", this.data.select, this.data.current)
   },
   backTop: function (e) { //回到顶部
     this.setData({
@@ -181,7 +195,10 @@ Page({
     if (res.from == 'button') {
       getApp().request({
         url: "/api/applets/content/operate/" + this.data.imgCollectionList[this.data.current].id,
-        method: "POST"
+        method: "POST",
+        data: {
+          type: "share"
+        }
       })
     }
     return {
