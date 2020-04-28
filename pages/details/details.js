@@ -45,6 +45,10 @@ Page({
       this.setData({
         imgCoverId: res.data.data.id
       })
+      this.putImgType({ //发送图片被点击
+        id: res.data.data.id,
+        type: "click"
+      })
       this.getImgCollectionData(res.data.data)
       this.getRecommendImgData(res.data.data)
     })
@@ -72,16 +76,6 @@ Page({
         this.like()
       })
     }
-  },
-
-  clickNum: function () { //统计图片点击
-    getApp().request({
-      url: "/api/applets/content/" + this.data.imgCover.id,
-      method: "POST",
-      data: {
-        type: "click"
-      }
-    })
   },
   getRecommendImgData: function (imgCoverData) { //根据图集封面数据获取推荐图片
     if (this.data.pageNo == 0) {
@@ -111,24 +105,27 @@ Page({
       }
     })
   },
+  putImgType: function(obj){//发送内容收藏分享点击
+    getApp().request({
+      url: "/api/applets/content/operate/" + obj.id,
+      method: "POST",
+      data: {
+        type: obj.type
+      }
+    })
+  },
   collect: function(){
     this.data.imgCollectionList[this.data.current].ifFavorite = !this.data.imgCollectionList[this.data.current].ifFavorite
     this.like()
     if(this.data.imgCollectionList[this.data.current].ifFavorite){
-      getApp().request({
-        url: "/api/applets/content/operate/" + this.data.imgCollectionList[this.data.current].id,
-        method: "POST",
-        data: {
-          type: "collect"
-        }
+      this.putImgType({
+        id: this.data.imgCollectionList[this.data.current].id,
+        type: "collect"
       })
     }else{
-      getApp().request({
-        url: "/api/applets/content/operate/" + this.data.imgCollectionList[this.data.current].id,
-        method: "POST",
-        data: {
-          type: "cancel_collect"
-        }
+      this.putImgType({
+        id: this.data.imgCollectionList[this.data.current].id,
+        type: "cancel_collect"
       })
     }
   },

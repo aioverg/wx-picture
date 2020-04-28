@@ -31,7 +31,6 @@ Page({
         pageNo: obj.pageNo
       }
     }).then(res => {
-
       _this.setData({
         imgList: res.data.data.list,
         pageNo: res.data.data.nextPage
