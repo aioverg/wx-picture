@@ -29,6 +29,9 @@ Page({
     })
   },
   bindchange: function (e) {
+    this.setData({
+      current: e.detail.current
+    })
     this.like()
   },
 
