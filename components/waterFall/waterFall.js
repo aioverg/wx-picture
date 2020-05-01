@@ -44,7 +44,7 @@ Component({
             rightHeight = Number.parseInt(res[1].height); //获取右边列表的高度
             console.log(leftHeight, rightHeight)
             this.setData({
-              maxHeight: leftHeight >= rightHeight ? leftHeight-20 : rightHeight-20
+              maxHeight: leftHeight >= rightHeight ? leftHeight : rightHeight
             })
             resolve();
           })

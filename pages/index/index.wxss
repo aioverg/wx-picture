@@ -10,7 +10,7 @@
   background-color: #fff;
 }
 .search_input .search input {
-  margin: 5px 0;
+  height: 6vh;
 }
 .app .wav {
   width: 100%;
@@ -18,15 +18,16 @@
   bottom: 0;
 }
 .app .scroll .over{
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   color: orange;
 }
-.app #nav-bar {
+.back-top {
   position: fixed;
-  z-index: 10;
-  height: 50px;
-  bottom: 0;
-  width: 100%;
-  background-color: #fff;
+  bottom: 20px;
+  right: 20px;
+}
+.back-top .back-img {
+  width: 30px;
+  height: 30px;
 }

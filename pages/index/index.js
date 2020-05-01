@@ -140,5 +140,10 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  backTop: function (e) { //回到顶部
+    this.setData({
+      scrollTop: 0
+    })
+  },
 })

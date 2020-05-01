@@ -5,7 +5,7 @@
 			<input placeholder="搜索" type="text" bindblur="setQueryValue" />
 		</view>
 	</view>
-	<scroll-view class="scroll" scroll-top="{{scrollTop}}" scroll-y lower-threshold="50" bindscrolltolower="scrollToLower" style="height: 100vh;">
+	<scroll-view class="scroll" scroll-top="{{scrollTop}}" scroll-y lower-threshold="50" bindscrolltolower="scrollToLower" style="height: 93vh;">
 		<view>
 			<water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}"></water-fall>
 		</view>
@@ -16,4 +16,11 @@
 	    <text>到底啦</text>
 	  </view>
 	</scroll-view>
+	<view class="back-top">
+	<image
+    class="back-img"
+    bindtap="backTop"
+    src="../../icons/backTop.png"
+  ></image>
+</view>
 </view>
