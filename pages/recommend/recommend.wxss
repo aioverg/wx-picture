@@ -1,1 +1,16 @@
 /* pages/popular/popular.wxss */
+
+.app .over{
+  font-size: 14px;
+  text-align: center;
+  color: orange;
+}
+.back-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.back-top .back-img {
+  width: 30px;
+  height: 30px;
+}

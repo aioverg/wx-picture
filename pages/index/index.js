@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+//const aioverg = require("../../utils/aioverg")
 
 Page({
   data: {
@@ -27,7 +28,7 @@ Page({
     this.setData({
       loading: false
     })
-    getApp().request({
+    app.request({
       url: obj.url,
       method: obj.method,
       data: {
@@ -103,6 +104,7 @@ Page({
   },
   onLoad: function () {
     this.queryAllData()
+    //aioverg.f()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

@@ -4,5 +4,18 @@
 		<view>
 			<water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}"></water-fall>
 		</view>
+		<view class="loading" hidden="{{loading}}">
+	    <loading></loading>
+	  </view>
+		<view class="over" hidden="{{over}}">
+	    <text>到底啦</text>
+	  </view>
 	</scroll-view>
+	<view class="back-top">
+	<image
+    class="back-img"
+    bindtap="backTop"
+    src="../../icons/backTop.png"
+  ></image>
+</view>
 </view>
