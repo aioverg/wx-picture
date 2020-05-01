@@ -1,5 +1,5 @@
 <!--components/waterFall/waterFall.wxml-->
-<view class="water-fall">
+<view class="water-fall" style="height: {{maxHeight}}px">
  <view id="left" class="left">
   <view
     wx:for="{{leftList}}"

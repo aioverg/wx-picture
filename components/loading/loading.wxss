@@ -1,0 +1,7 @@
+/* components/loading/loading.wxss */
+.loading {
+  text-align: center;
+}
+.loading .image {
+  width: 20px;
+}

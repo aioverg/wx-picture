@@ -74,7 +74,7 @@
 				},
 				{
 					"id": 2,
-					"name": "pages/recommend/recommend",
+					"name": "推荐",
 					"pathName": "pages/recommend/recommend",
 					"query": "",
 					"scene": null

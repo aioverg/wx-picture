@@ -17,6 +17,7 @@ Component({
 
   //组件的初始数据
   data: {
+    maxHeight: null,
     leftList: [], //左列数据
     rightList: [], //右列数据
     dataList: [] //全部数据
@@ -39,8 +40,12 @@ Component({
           queryDom.select('#left').boundingClientRect()
           queryDom.select('#right').boundingClientRect()
           queryDom.exec((res) => {
-            leftHeight = res[0].height; //获取左边列表的高度
-            rightHeight = res[1].height; //获取右边列表的高度
+            leftHeight = Number.parseInt(res[0].height); //获取左边列表的高度
+            rightHeight = Number.parseInt(res[1].height); //获取右边列表的高度
+            console.log(leftHeight, rightHeight)
+            this.setData({
+              maxHeight: leftHeight >= rightHeight ? leftHeight-20 : rightHeight-20
+            })
             resolve();
           })
         })

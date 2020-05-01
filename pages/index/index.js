@@ -7,6 +7,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    loading: true,
     scrollTop: 0,
     toUrl: "../../pages/details/details",
     queryValue: "",
@@ -16,16 +17,20 @@ Page({
   query: function (obj) {
     let _this = this
     if (this.data.pageNo == 0) {
-      wx.showToast({
+     /* wx.showToast({
         title: '没有更多数据',
         duration: 1500
-      })
+      })*/
       return "over"
     }
+    this.setData({
+      loading: false
+    })
     getApp().request({
       url: obj.url,
       method: obj.method,
       data: {
+        loading: true,
         keywords: obj.keywords,
         pageSize: obj.pageSize,
         pageNo: obj.pageNo

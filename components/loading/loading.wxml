@@ -1,0 +1,4 @@
+<!--components/loading/loading.wxml-->
+<view class="loading">
+  <image mode="widthFix" class="image" src="../../icons/loading.gif"></image>
+</view>
