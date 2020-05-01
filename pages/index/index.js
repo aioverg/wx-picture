@@ -18,10 +18,6 @@ Page({
   query: function (obj) {
     let _this = this
     if (this.data.pageNo == 0) {
-     /* wx.showToast({
-        title: '没有更多数据',
-        duration: 1500
-      })*/
       this.setData({
         loading: true,
         over: false
@@ -35,13 +31,13 @@ Page({
       url: obj.url,
       method: obj.method,
       data: {
-        loading: true,
         keywords: obj.keywords,
         pageSize: obj.pageSize,
         pageNo: obj.pageNo
       }
     }).then(res => {
       _this.setData({
+        loading: true,
         imgList: res.data.data.list,
         pageNo: res.data.data.nextPage
       })

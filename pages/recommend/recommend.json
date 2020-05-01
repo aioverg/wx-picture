@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "water-fall": "../../components/waterFall/waterFall",
-    "loading": "../../components/loading/loading"
+    "water-fall": "../../components/waterFall/waterFall"
   }
 }

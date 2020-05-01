@@ -3,6 +3,7 @@
     "share-info": "../../components/shareInfo/shareInfo",
     "like-info": "../../components/likeInfo/likeInfo",
     "water-fall": "../../components/waterFall/waterFall",
-    "home-tab": "../../components/homeTab/homeTab"
+    "home-tab": "../../components/homeTab/homeTab",
+    "loading": "../../components/loading/loading"
   }
 }

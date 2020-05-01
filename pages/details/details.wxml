@@ -18,6 +18,12 @@
 	<view>
     <view class="text">相关推荐</view>
 		<water-fall id="water-fall" toUrl="{{toUrl}}" imgList="{{imgList}}"></water-fall>
+		<view class="loading" hidden="{{loading}}">
+	    <loading></loading>
+	  </view>
+		<view class="over" hidden="{{over}}">
+	    <text>到底啦</text>
+	  </view>
 	</view>
 </scroll-view>
 <view class="back-top">

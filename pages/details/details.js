@@ -11,6 +11,8 @@ Page({
     like: false,
     toUrl: "../../pages/details/details",
     toHome: "../../pages/index/index",
+    loading: true,
+    over: true,
     imgCollectionList: null,
     imgList: [],
     pageNo: 1,
@@ -79,12 +81,15 @@ Page({
   },
   getRecommendImgData: function (imgCoverData) { //根据图集封面数据获取推荐图片
     if (this.data.pageNo == 0) {
-      wx.showToast({
-        title: '没有更多数据',
-        duration: 1500
+      this.setData({
+        loading: true,
+        over: false
       })
       return "over"
     }
+    this.setData({
+      loading: false
+    })
     getApp().request({
       url: "/api/applets/content/pageQueryRelateContent",
       method: "POST",
@@ -95,6 +100,7 @@ Page({
       }
     }).then(res => {
       this.setData({
+        loading: true,
         imgList: res.data.data.list,
         pageNo: res.data.data.nextPage
       })
