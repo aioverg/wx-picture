@@ -8,6 +8,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     loading: true,
+    over: true,
     scrollTop: 0,
     toUrl: "../../pages/details/details",
     queryValue: "",
@@ -21,6 +22,10 @@ Page({
         title: '没有更多数据',
         duration: 1500
       })*/
+      this.setData({
+        loading: true,
+        over: false
+      })
       return "over"
     }
     this.setData({

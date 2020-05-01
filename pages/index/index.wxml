@@ -12,5 +12,8 @@
 		<view class="loading" hidden="{{loading}}">
 	    <loading></loading>
 	  </view>
+		<view class="over" hidden="{{over}}">
+	    <text>到底啦</text>
+	  </view>
 	</scroll-view>
 </view>

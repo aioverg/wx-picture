@@ -17,7 +17,11 @@
   z-index: 10;
   bottom: 0;
 }
-
+.app .scroll .over{
+  font-size: 12px;
+  text-align: center;
+  color: orange;
+}
 .app #nav-bar {
   position: fixed;
   z-index: 10;
